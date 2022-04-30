@@ -1,6 +1,12 @@
 <?php
+
 namespace App;
-class Empresa
+
+use Interfaces\IEmpresa as IEmpresa;
+
+require_once '../../../vendor/autoload.php';
+
+class Empresa implements IEmpresa
 {
   private $conn;
   private $table = "empresas";
