@@ -19,3 +19,5 @@ const HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
 
 const DELETE = "DELETE";
 const GET = "GET";
+const POST = "POST";
+const UPDATE = "UPDATE";
