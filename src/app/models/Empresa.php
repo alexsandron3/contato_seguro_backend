@@ -62,4 +62,18 @@ class Empresa implements IEmpresa
     }
     return false;
   }
+
+  public function deletar(int $id): bool
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+    $stmt = $this->conn->prepare($query);
+
+    $this->id = htmlspecialchars(strip_tags($id));
+    $stmt->bindParam(':id', $id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+    return false;
+  }
 }
