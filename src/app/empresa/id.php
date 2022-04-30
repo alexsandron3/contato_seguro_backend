@@ -4,7 +4,10 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once "../configs/constants.php";
-include_once "../bootstrap.php";
+require_once '../../../vendor/autoload.php';
+
+use App\Empresa;
+use Database\Database;
 
 $database = new Database();
 

@@ -1,11 +1,14 @@
 <?php
 
+use App\Empresa;
+use Database\Database;
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once "../configs/constants.php";
-include_once "../bootstrap.php";
-$database = new Database();
+require_once '../../../vendor/autoload.php';
+$database = new Database;
 
 $connection = $database->getConnection();
 
