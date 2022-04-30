@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-use App\Interfaces\ICrud as Icrud;
+use App\Interfaces\ICrud;
 
 require_once '../../../vendor/autoload.php';
 
