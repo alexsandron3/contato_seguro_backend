@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 use App\Database\Database;
 use App\Empresa;
 
-include_once "../configs/constants.php";
+include_once "../utils/constants.php";
 require_once '../../../vendor/autoload.php';
 
 $database = new Database();

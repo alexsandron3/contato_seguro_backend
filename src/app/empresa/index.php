@@ -6,7 +6,7 @@ use App\Empresa;
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-include_once "../configs/constants.php";
+include_once "../utils/constants.php";
 require_once '../../../vendor/autoload.php';
 $database = new DatabaseDatabase;
 
