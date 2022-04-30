@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Interfaces\IEmpresa as IEmpresa;
+use App\Interfaces\IEmpresa as IEmpresa;
 
 require_once '../../../vendor/autoload.php';
 

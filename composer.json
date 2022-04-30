@@ -1,9 +1,9 @@
 {
     "autoload": {
         "psr-4": {
-            "Database\\": "src/app/configs",
             "App\\": "src/app/models",
-            "Interfaces\\": "src/app/interfaces"
+            "App\\Database\\": "src/app/configs",
+            "App\\Interfaces\\": "src/app/interfaces"
         }
     },
     "require": {

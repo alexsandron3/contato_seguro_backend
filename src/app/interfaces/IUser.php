@@ -1,11 +1,11 @@
 <?php
 
-namespace Interfaces;
+namespace App\Interfaces;
 
-use Interfaces\ICrud as Icrud;
+use App\Interfaces\ICrud as Icrud;
 
 require_once '../../../vendor/autoload.php';
 
-interface IEmpresa extends ICrud
+interface IEmpresa extends Icrud
 {
 }
