@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Interfaces\IEmpresa as IEmpresa;
+use App\Interfaces\IEmpresa;
 
 require_once '../../../vendor/autoload.php';
 
@@ -40,5 +40,26 @@ class Empresa implements IEmpresa
     $this->nome = $resultado['nome'];
     $this->endereco = $resultado['endereco'];
     $this->cnpj = $resultado['cnpj'];
+  }
+
+  public function cadastrar(array $empresa): bool
+  {
+    $query = "INSERT INTO " . $this->table . " SET nome = :nome, endereco = :endereco, cnpj = :cnpj";
+
+    $stmt = $this->conn->prepare($query);
+    // htmlspecialchars e strip_tags usado para  prevenção contra inserção de código html
+
+    $this->nome = htmlspecialchars(strip_tags($empresa['nome']));
+    $this->endereco = htmlspecialchars(strip_tags($empresa['endereco']));
+    $this->cnpj = htmlspecialchars(strip_tags($empresa['cnpj']));
+
+    $stmt->bindParam(":nome", $this->nome);
+    $stmt->bindParam(":endereco", $this->endereco);
+    $stmt->bindParam(":cnpj", $this->cnpj);
+    if ($stmt->execute()) {
+      $this->id = $this->conn->lastInsertId();
+      return true;
+    }
+    return false;
   }
 }
