@@ -8,4 +8,5 @@ interface ICrud
   public function listarPorId(int $id);
   public function cadastrar(array $empresa): bool;
   public function deletar(int $id): bool;
+  public function atualizar(int $id, array $empresa): bool;
 }

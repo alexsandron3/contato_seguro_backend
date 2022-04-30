@@ -76,4 +76,26 @@ class Empresa implements IEmpresa
     }
     return false;
   }
+
+  public function atualizar(int $id, array $empresa): bool
+  {
+    $query = "UPDATE " . $this->table . " SET nome = :nome, endereco = :endereco, cnpj = :cnpj WHERE id = :id";
+
+    $stmt = $this->conn->prepare($query);
+    // htmlspecialchars e strip_tags usado para  prevenção contra inserção de código html
+
+    $this->nome = htmlspecialchars(strip_tags($empresa['nome']));
+    $this->endereco = htmlspecialchars(strip_tags($empresa['endereco']));
+    $this->cnpj = htmlspecialchars(strip_tags($empresa['cnpj']));
+    $this->id = htmlspecialchars(strip_tags($id));
+
+    $stmt->bindParam(":nome", $this->nome);
+    $stmt->bindParam(":endereco", $this->endereco);
+    $stmt->bindParam(":cnpj", $this->cnpj);
+    $stmt->bindParam(":id", $this->id);
+    if ($stmt->execute()) {
+      return true;
+    }
+    return false;
+  }
 }
