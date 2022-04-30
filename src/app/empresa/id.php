@@ -2,7 +2,7 @@
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header('Access-Control-Allow-Methods: GET, DELETE');
+header('Access-Control-Allow-Methods: GET, DELETE, UPDATE');
 
 include_once "../utils/constants.php";
 include_once '../../../vendor/autoload.php';
@@ -53,6 +53,20 @@ if ($tipoRequisicao === GET) {
     $resposta = array(
       "mensagem" => SUCESSO_AO_DELETAR,
       "dados" => array(),
+    );
+  }
+} else if ($tipoRequisicao === PUT) {
+  $dados = json_decode(file_get_contents('php://input'));
+  $empresaAtualizada = array(
+    "nome" => $dados->nome,
+    "endereco" => $dados->endereco,
+    "cnpj" => $dados->cnpj
+  );
+  $empresaFoiAtualizada = $empresa->atualizar($id, $empresaAtualizada);
+  if ($empresaFoiAtualizada) {
+    $resposta = array(
+      "mensagem" => SUCESSO_AO_ATUALIZAR,
+      "dados" => $empresaAtualizada
     );
   }
 } else {
