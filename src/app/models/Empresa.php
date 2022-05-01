@@ -71,7 +71,7 @@ class Empresa implements IEmpresa
     $this->id = htmlspecialchars(strip_tags($id));
     $stmt->bindParam(':id', $id);
 
-    if ($stmt->execute()) {
+    if ($stmt->execute() && $stmt->rowCount()) {
       return true;
     }
     return false;
