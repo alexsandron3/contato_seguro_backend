@@ -43,10 +43,10 @@ if ($tipoRequisicao === GET) {
 
   $empresaFoiCadastrada = $empresa->cadastrar($novaEmpresa);
 
-  if (!$empresaFoiCadastrada) {
+  if ($empresaFoiCadastrada) {
     http_response_code(HTTP_STATUS_CREATED);
     $resposta['mensagem'] = SUCESSO_AO_CADASTRAR;
-    $resposta['empresa'] = array(
+    $resposta['dados'] = array(
       "id" => $empresa->id,
       "nome" => $empresa->nome,
       "endereco" => $empresa->endereco,
