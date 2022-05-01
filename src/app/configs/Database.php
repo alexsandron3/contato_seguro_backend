@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Database;
+
+include_once '../../../vendor/autoload.php';
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
 class Database
 {
-  private $host = "localhost";
-  private $database_name = "contato_seguro_desafio";
-  private $username = "root";
-  private $password = "@L3xsandro";
   public $conn;
   public function getConnection()
   {
     $this->conn = null;
     try {
-      $this->conn = new \PDO("mysql:host=" . $this->host . ";dbname=" . $this->database_name, $this->username, $this->password);
+      $this->conn = new \PDO("mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASS']);
     } catch (\PDOException $exception) {
       echo "Couldnt connect to database: " . $exception->getMessage();
     }
