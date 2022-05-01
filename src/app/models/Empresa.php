@@ -36,7 +36,7 @@ class Empresa extends Entidade implements IEmpresa
     $query = "INSERT INTO " . $this->table . " SET nome = :nome, endereco = :endereco, cnpj = :cnpj";
 
     $stmt = $this->conexao->prepare($query);
-    // htmlspecialchars e strip_tags usado para  prevenção contra inserção de código html
+
 
     $this->nome = htmlspecialchars(strip_tags($empresa['nome']));
     $this->endereco = htmlspecialchars(strip_tags($empresa['endereco']));

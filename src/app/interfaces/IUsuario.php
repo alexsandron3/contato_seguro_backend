@@ -6,6 +6,6 @@ use App\Interfaces\ICrud;
 
 require_once '../../../vendor/autoload.php';
 
-interface IEmpresa extends Icrud
+interface IUsuario extends Icrud
 {
 }
