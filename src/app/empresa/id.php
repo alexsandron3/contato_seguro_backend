@@ -1,7 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Headers: access');
-header('Access-Control-Allow-Methods: GET, POST, PUT');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 header('Access-Control-Allow-Origin: *');
@@ -56,6 +56,12 @@ if ($tipoRequisicao === GET) {
       "mensagem" => SUCESSO_AO_DELETAR,
       "dados" => array(),
     );
+  } else {
+    http_response_code(HTTP_STATUS_BAD_REQUEST);
+    $resposta = array(
+      "mensagem" => FALHA_AO_DELETAR,
+      "dados" => array(),
+    );
   }
 } elseif ($tipoRequisicao === PUT) {
   $dados = json_decode(file_get_contents('php://input'));
@@ -66,6 +72,7 @@ if ($tipoRequisicao === GET) {
   );
   $empresaFoiAtualizada = $empresa->atualizar($id, $empresaAtualizada);
   if ($empresaFoiAtualizada) {
+    $empresaAtualizada['id'] = $id;
     $resposta = array(
       "mensagem" => SUCESSO_AO_ATUALIZAR,
       "dados" => $empresaAtualizada
