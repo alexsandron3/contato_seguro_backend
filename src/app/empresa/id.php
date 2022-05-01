@@ -1,7 +1,7 @@
 <?php
 
 header('Access-Control-Allow-Headers: access');
-header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Allow-Methods: GET, POST, PUT');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 header('Access-Control-Allow-Origin: *');
@@ -48,7 +48,7 @@ if ($tipoRequisicao === GET) {
     http_response_code(HTTP_STATUS_NOT_FOUND);
     $resposta['mensagem'] = NADA_ENCONTRADO_NA_PESQUISA;
   }
-} else if ($tipoRequisicao === DELETE) {
+} elseif ($tipoRequisicao === DELETE) {
   $empresaFoiDeletada = $empresa->deletar($id);
   if ($empresaFoiDeletada) {
     http_response_code(HTTP_STATUS_OK);
@@ -57,7 +57,7 @@ if ($tipoRequisicao === GET) {
       "dados" => array(),
     );
   }
-} else if ($tipoRequisicao === PUT) {
+} elseif ($tipoRequisicao === PUT) {
   $dados = json_decode(file_get_contents('php://input'));
   $empresaAtualizada = array(
     "nome" => $dados->nome,
@@ -71,8 +71,5 @@ if ($tipoRequisicao === GET) {
       "dados" => $empresaAtualizada
     );
   }
-} else {
-  $resposta['mensagem'] = METODO_NAO_PERMITIDO;
-  http_response_code(HTTP_STATUS_METHOD_NOT_ALLOWED);
 }
 echo json_encode($resposta);
