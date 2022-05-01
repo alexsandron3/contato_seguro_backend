@@ -6,33 +6,22 @@ use App\Interfaces\IEmpresa;
 
 require_once '../../../vendor/autoload.php';
 
-class Empresa implements IEmpresa
+class Empresa extends Entidade implements IEmpresa
 {
-  private $conn;
-  private $table = "empresas";
+  protected string $table = "empresas";
+  public string $endereco;
+  public string $cnpj;
 
-  public $id;
-  public $nome;
-  public $endereco;
-  public $cnpj;
-
-  public function __construct($connection)
+  public function __construct($conexao)
   {
-    $this->conn = $connection;
+    Entidade::__construct($conexao);
   }
 
-  public function listarTudo()
-  {
-    $query = "SELECT * FROM " . $this->table . ";";
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute();
-    return $stmt;
-  }
 
   public function listarPorId(int $id)
   {
     $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->conexao->prepare($query);
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $resultado = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -46,7 +35,7 @@ class Empresa implements IEmpresa
   {
     $query = "INSERT INTO " . $this->table . " SET nome = :nome, endereco = :endereco, cnpj = :cnpj";
 
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->conexao->prepare($query);
     // htmlspecialchars e strip_tags usado para  prevenção contra inserção de código html
 
     $this->nome = htmlspecialchars(strip_tags($empresa['nome']));
@@ -57,31 +46,18 @@ class Empresa implements IEmpresa
     $stmt->bindParam(":endereco", $this->endereco);
     $stmt->bindParam(":cnpj", $this->cnpj);
     if ($stmt->execute()) {
-      $this->id = $this->conn->lastInsertId();
+      $this->id = $this->conexao->lastInsertId();
       return true;
     }
     return false;
   }
 
-  public function deletar(int $id): bool
-  {
-    $query = "DELETE FROM " . $this->table . " WHERE id = :id";
-    $stmt = $this->conn->prepare($query);
-
-    $this->id = htmlspecialchars(strip_tags($id));
-    $stmt->bindParam(':id', $id);
-
-    if ($stmt->execute() && $stmt->rowCount()) {
-      return true;
-    }
-    return false;
-  }
 
   public function atualizar(int $id, array $empresa): bool
   {
     $query = "UPDATE " . $this->table . " SET nome = :nome, endereco = :endereco, cnpj = :cnpj WHERE id = :id";
 
-    $stmt = $this->conn->prepare($query);
+    $stmt = $this->conexao->prepare($query);
     // htmlspecialchars e strip_tags usado para  prevenção contra inserção de código html
 
     $this->nome = htmlspecialchars(strip_tags($empresa['nome']));
