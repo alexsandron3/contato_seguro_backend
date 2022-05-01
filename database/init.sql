@@ -66,6 +66,7 @@ CREATE TABLE `empresas_usuarios` (
 
 LOCK TABLES `empresas_usuarios` WRITE;
 /*!40000 ALTER TABLE `empresas_usuarios` DISABLE KEYS */;
+INSERT INTO `empresas_usuarios` VALUES (1,1),(2,2),(3,3),(4,4);
 /*!40000 ALTER TABLE `empresas_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,8 +83,9 @@ CREATE TABLE `usuarios` (
   `telefone` varchar(20) DEFAULT '',
   `dataNascimento` date DEFAULT NULL,
   `cidadeNascimento` varchar(255) DEFAULT '',
+  `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +94,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'1@1.com','1111111','1999-02-06','cidade1','usuario1'),(2,'2@2.com','222222','1999-02-06','cidade2','usuario2'),(3,'3@3.com','333333','1999-02-06','cidade3','usuario3'),(4,'4@4.com','444444','1999-02-06','cidade4','usuario4');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-01  1:14:57
+-- Dump completed on 2022-05-01 13:17:51
