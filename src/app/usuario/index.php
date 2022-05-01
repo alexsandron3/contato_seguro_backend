@@ -37,7 +37,8 @@ if ($tipoRequisicao === GET) {
     "dataNascimento" => $dados->dataNascimento,
     "cidadeNascimento" => $dados->cidadeNascimento,
     "email" => $dados->email,
-    "telefone" => $dados->telefone
+    "telefone" => $dados->telefone,
+    "empresas" => $dados->empresas
   );
 
   $usuarioFoiCadastrado = $usuario->cadastrar($novoUsuario);

@@ -13,6 +13,7 @@ class Usuario extends Entidade implements IUsuario
   public string $cidadeNascimento;
   public string $email;
   public string $telefone;
+  public int $empresa;
 
   public function __construct($conexao)
   {
@@ -46,17 +47,27 @@ class Usuario extends Entidade implements IUsuario
     $this->cidadeNascimento = htmlspecialchars(strip_tags($usuario['cidadeNascimento']));
     $this->email = htmlspecialchars(strip_tags($usuario['email']));
     $this->telefone = htmlspecialchars(strip_tags($usuario['telefone']));
+    $this->empresa = htmlspecialchars(strip_tags($usuario['empresas']));
 
     $stmt->bindParam(":nome", $this->nome);
     $stmt->bindParam(":dataNascimento", $this->dataNascimento);
     $stmt->bindParam(":cidadeNascimento", $this->cidadeNascimento);
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":telefone", $this->telefone);
+
+    $this->conexao->beginTransaction();
     if ($stmt->execute()) {
       $this->id = $this->conexao->lastInsertId();
-      return true;
+      $empresa_usuario = new Empresa_Usuario($this->conexao);
+      $relacionamentoRealizado = $empresa_usuario->novoRelacionamento($this->id, $this->empresa);
+      if ($relacionamentoRealizado) {
+        $this->conexao->commit();
+        return true;
+      }
+      $this->conexao->rollBack();
+      return false;
     }
-    return false;
+    return true;
   }
 
   public function atualizar(int $id, array $usuario): bool
