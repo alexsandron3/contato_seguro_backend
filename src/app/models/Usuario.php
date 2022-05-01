@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Interfaces\IUsuario;
+use Error;
 
 require_once '../../../vendor/autoload.php';
 
@@ -13,7 +14,7 @@ class Usuario extends Entidade implements IUsuario
   public string $cidadeNascimento;
   public string $email;
   public string $telefone;
-  public int $empresa;
+  public array $empresas;
 
   public function __construct($conexao)
   {
@@ -47,7 +48,7 @@ class Usuario extends Entidade implements IUsuario
     $this->cidadeNascimento = htmlspecialchars(strip_tags($usuario['cidadeNascimento']));
     $this->email = htmlspecialchars(strip_tags($usuario['email']));
     $this->telefone = htmlspecialchars(strip_tags($usuario['telefone']));
-    $this->empresa = htmlspecialchars(strip_tags($usuario['empresas']));
+    $this->empresas = $usuario['empresas'];
 
     $stmt->bindParam(":nome", $this->nome);
     $stmt->bindParam(":dataNascimento", $this->dataNascimento);
@@ -55,19 +56,26 @@ class Usuario extends Entidade implements IUsuario
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":telefone", $this->telefone);
 
+
     $this->conexao->beginTransaction();
     if ($stmt->execute()) {
       $this->id = $this->conexao->lastInsertId();
-      $empresa_usuario = new Empresa_Usuario($this->conexao);
-      $relacionamentoRealizado = $empresa_usuario->novoRelacionamento($this->id, $this->empresa);
-      if ($relacionamentoRealizado) {
+      try {
+        foreach ($this->empresas as $key => $empresa) {
+          $empresa_usuario = new Empresa_Usuario($this->conexao);
+          $relacionamentoRealizado = $empresa_usuario->novoRelacionamento($this->id, $empresa);
+          if (!$relacionamentoRealizado) {
+            throw new Error;
+          }
+        }
         $this->conexao->commit();
         return true;
+      } catch (\Throwable $th) {
+        $this->conexao->rollBack();
+        return false;
       }
-      $this->conexao->rollBack();
-      return false;
+      return true;
     }
-    return true;
   }
 
   public function atualizar(int $id, array $usuario): bool
