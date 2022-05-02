@@ -12,6 +12,9 @@ abstract class Entidade implements ICrud
   public int $id;
   public string $nome;
   protected string $table;
+  protected string $chavePrimaria;
+  protected string $chaveEstrangeira;
+  protected string $relacionamento;
   protected $conexao;
 
   public function __construct($conexao)
@@ -25,7 +28,7 @@ abstract class Entidade implements ICrud
 
   public function listarTudo()
   {
-    $query = "SELECT * FROM " . $this->table . ";";
+    $query = "SELECT a.*, c.nome AS nome" . $this->relacionamento . ", c.id AS " . $this->chaveEstrangeira . " FROM " . $this->table . " a JOIN empresas_usuarios b ON a.id = b." . $this->chavePrimaria . " JOIN " . $this->relacionamento . " c ON b." . $this->chaveEstrangeira . " = c.id ORDER BY a.id";
     $stmt = $this->conexao->prepare($query);
     $stmt->execute();
     return $stmt;
