@@ -9,6 +9,9 @@ require_once '../../../vendor/autoload.php';
 class Empresa extends Entidade implements IEmpresa
 {
   protected string $table = "empresas";
+  protected string $chavePrimaria = "idEmpresa";
+  protected string $chaveEstrangeira = "idUsuario";
+  protected string $relacionamento = "usuarios";
   public string $endereco;
   public string $cnpj;
 
