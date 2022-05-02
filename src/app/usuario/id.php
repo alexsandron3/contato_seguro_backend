@@ -51,6 +51,21 @@ if ($tipoRequisicao === GET) {
     http_response_code(HTTP_STATUS_NOT_FOUND);
     $resposta['mensagem'] = NADA_ENCONTRADO_NA_PESQUISA;
   }
+} elseif ($tipoRequisicao === DELETE) {
+  $usuarioFoiDeletado = $usuario->deletar($id);
+  if ($usuarioFoiDeletado) {
+    http_response_code(HTTP_STATUS_OK);
+    $resposta = array(
+      "mensagem" => SUCESSO_AO_DELETAR,
+      "dados" => array(),
+    );
+  } else {
+    http_response_code(HTTP_STATUS_BAD_REQUEST);
+    $resposta = array(
+      "mensagem" => FALHA_AO_DELETAR,
+      "dados" => array(),
+    );
+  }
 }
 
 echo json_encode($resposta);
