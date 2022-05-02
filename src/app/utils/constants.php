@@ -7,6 +7,7 @@ const SUCESSO_AO_DELETAR = 'Registro apagado com sucesso!';
 const SUCESSO_AO_ATUALIZAR = 'Registro atualizado com sucesso!';
 const FALHA_AO_CADASTRAR = 'Falha ao tentar cadastrar registro!';
 const FALHA_AO_DELETAR = 'Falha ao tentar deletar registro!';
+const FALHA_AO_ATUALIZAR = 'Falha ao tentar atualizar este registro!';
 const NADA_ENCONTRADO_NA_PESQUISA = 'Nenhum registro foi encontrado!';
 const METODO_NAO_PERMITIDO = "Método não permitido!";
 const ID_NAO_INFORMADO = "ID não encontrado na requisição!";
