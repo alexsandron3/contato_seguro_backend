@@ -10,6 +10,9 @@ require_once '../../../vendor/autoload.php';
 class Usuario extends Entidade implements IUsuario
 {
   protected string $table = "usuarios";
+  protected string $chavePrimaria = "idUsuario";
+  protected string $chaveEstrangeira = "idEmpresa";
+  protected string $relacionamento = "empresas";
   public string $dataNascimento;
   public string $cidadeNascimento;
   public string $email;
