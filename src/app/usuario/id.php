@@ -66,6 +66,31 @@ if ($tipoRequisicao === GET) {
       "dados" => array(),
     );
   }
+} elseif ($tipoRequisicao === PUT) {
+  $dados = json_decode(file_get_contents('php://input'));
+  $usuarioAtualizado = array(
+    "nome" => $dados->nome,
+    "dataNascimento" => $dados->dataNascimento,
+    "cidadeNascimento" => $dados->cidadeNascimento,
+    "email" => $dados->email,
+    "telefone" => $dados->telefone,
+    "empresas" => $dados->empresas
+  );
+  $usuarioFoiAtualizado = $usuario->atualizar($id, $usuarioAtualizado);
+  if ($usuarioFoiAtualizado) {
+    http_response_code(HTTP_STATUS_OK);
+    $usuarioAtualizado['id'] = $id;
+    $resposta = array(
+      "mensagem" => SUCESSO_AO_ATUALIZAR,
+      "dados" => $usuarioAtualizado
+    );
+  } else {
+    $resposta = array(
+      "mensagem" => FALHA_AO_ATUALIZAR,
+      "dados" => array()
+    );
+    http_response_code(HTTP_STATUS_BAD_REQUEST);
+  }
 }
 
 echo json_encode($resposta);
