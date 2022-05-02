@@ -45,16 +45,16 @@ class Usuario extends Entidade implements IUsuario
 
     $stmt = $this->conexao->prepare($query);
 
-
     $this->nome = htmlspecialchars(strip_tags($usuario['nome']));
     $this->dataNascimento = htmlspecialchars(strip_tags($usuario['dataNascimento']));
+    $data = (is_null($usuario['dataNascimento']) || empty($usuario['dataNascimento'])) ? null : $this->dataNascimento;
     $this->cidadeNascimento = htmlspecialchars(strip_tags($usuario['cidadeNascimento']));
     $this->email = htmlspecialchars(strip_tags($usuario['email']));
     $this->telefone = htmlspecialchars(strip_tags($usuario['telefone']));
     $this->empresas = $usuario['empresas'];
 
     $stmt->bindParam(":nome", $this->nome);
-    $stmt->bindParam(":dataNascimento", $this->dataNascimento);
+    $stmt->bindParam(":dataNascimento", $data);
     $stmt->bindParam(":cidadeNascimento", $this->cidadeNascimento);
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":telefone", $this->telefone);
@@ -83,27 +83,32 @@ class Usuario extends Entidade implements IUsuario
 
   public function atualizar(int $id, array $usuario): bool
   {
-    $query = "UPDATE " . $this->table . " ET nome = :nome, dataNascimento = :dataNascimento, cidadeNascimento = :cidadeNascimento, email = :email, telefone = :telefone WHERE id = :id";
+    $query = "UPDATE " . $this->table . " SET nome = :nome, dataNascimento = :dataNascimento, cidadeNascimento = :cidadeNascimento, email = :email, telefone = :telefone WHERE id = :id";
+
+    // print_r($usuario);
 
     $stmt = $this->conexao->prepare($query);
     // htmlspecialchars e strip_tags usado para  prevenção contra inserção de código html
 
     $this->nome = htmlspecialchars(strip_tags($usuario['nome']));
     $this->dataNascimento = htmlspecialchars(strip_tags($usuario['dataNascimento']));
+    $data = (is_null($usuario['dataNascimento']) || empty($usuario['dataNascimento'])) ? null : $this->dataNascimento;
+
     $this->cidadeNascimento = htmlspecialchars(strip_tags($usuario['cidadeNascimento']));
     $this->email = htmlspecialchars(strip_tags($usuario['email']));
     $this->telefone = htmlspecialchars(strip_tags($usuario['telefone']));
     $this->id = htmlspecialchars(strip_tags($id));
 
     $stmt->bindParam(":nome", $this->nome);
-    $stmt->bindParam(":endereco", $this->endereco);
-    $stmt->bindParam(":cnpj", $this->cnpj);
+    $stmt->bindParam(":dataNascimento", $data);
+    $stmt->bindParam(":cidadeNascimento", $this->cidadeNascimento);
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":telefone", $this->telefone);
     $stmt->bindParam(":id", $this->id);
     if ($stmt->execute()) {
       return true;
     }
+    // print_r($stmt->errorInfo());
     return false;
   }
 }
