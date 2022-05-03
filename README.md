@@ -3,6 +3,7 @@
 
 Este repositório contém a parte de Back End do desafio
 
+---
 ## Como rodar o projeto
 
 
@@ -26,7 +27,7 @@ Para rodar o Back End, siga estas etapas:
 ```bash
   $ docker-compose up
 ```
-
+---
 ## Documentação da API
 
 ### Usuário
@@ -128,6 +129,8 @@ Para rodar o Back End, siga estas etapas:
 ```http
   DELETE /app/empresa/id.php/${id}
 ```
+
+---
 ## Dificuldades e Desafios
 
 
