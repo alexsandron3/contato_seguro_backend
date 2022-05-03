@@ -87,6 +87,7 @@ Para rodar o Back End, siga estas etapas:
 | `nome`      | `string` | **Obrigatório**. O NOME da empresa |
 | `endereco`      | `string` | **Obrigatório**. O da empresa |
 | `cnpj`      | `string` | **Obrigatório**. O cnpj da empresa |
+
 **Parâmetro**
 
 | Parâmetro   | Tipo       | Descrição                                   |
@@ -104,13 +105,6 @@ Para rodar o Back End, siga estas etapas:
 ```http
   GET app/empresa/id.php/${id}
 ```
-
-**Parâmetro**
-
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `string` | **Obrigatório**. O ID da empresa que você quer |
-
 
 #### Cadastra uma empresa
 
