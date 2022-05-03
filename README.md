@@ -3,6 +3,10 @@
 
 Este repositório contém a parte de Back End do desafio
 
+**Você pode testar as requisições no Postman**
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/562065d8e00c3cc4afca?action=collection%2Fimport)
+
 ---
 ## Como rodar o projeto
 
@@ -167,3 +171,11 @@ Com essas duas informações entendi que a empresa trabalha com banco de dados r
 Além disso, o readme deixava bem claro que existiam entidades e relacionamentos, características fortes de bancos de dados relacionais.
 A escolha do Mysql foi mais pessoal, é um banco que eu utilizo e estudo a alguns anos e tenho mais facilidade com a sintaxe e documentação.
 
+
+## Conclusão
+
+Sem dúvidas o maior aprendizado foi no backend. Após cerca de 4 meses sem programar em PHP, volto programando em um paradigma que nunca tinha aplicado e com vários conceitos diferentes.
+
+Algumas coisas ficaram faltando, como validações mais profundas e testes, e eu poderia ter criado outros relacionamentos e entidades, mas dado o tempo, consegui fazer o foi pedido. 
+
+Nunca tinha usado nenhuma biblioteca ou framework no PHP, então meu planejamento inicial era focar em aplicar o mínimo requerido, pois este ainda precisava que eu fosse atrás de conhecimento, para depois estudar sobre frameworks e bibliotecas que eu poderia fazer. O tempo não foi suficiente mas tenho certeza que com um pouco de tempo eu tenho condições de aprender estes utilitários e fazer entregas mais completas.
