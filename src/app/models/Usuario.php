@@ -59,16 +59,18 @@ class Usuario extends Entidade implements IUsuario
     $stmt->bindParam(":email", $this->email);
     $stmt->bindParam(":telefone", $this->telefone);
 
-
     $this->conexao->beginTransaction();
     if ($stmt->execute()) {
       $this->id = $this->conexao->lastInsertId();
+
       try {
-        foreach ($this->empresas as $key => $empresa) {
-          $empresa_usuario = new Empresa_Usuario($this->conexao);
-          $relacionamentoRealizado = $empresa_usuario->novoRelacionamento($this->id, $empresa);
-          if (!$relacionamentoRealizado) {
-            throw new Error;
+        if (count($this->empresas)) {
+          foreach ($this->empresas as $key => $empresa) {
+            $empresa_usuario = new Empresa_Usuario($this->conexao);
+            $relacionamentoRealizado = $empresa_usuario->novoRelacionamento($this->id, $empresa);
+            if (!$relacionamentoRealizado) {
+              throw new Error;
+            }
           }
         }
         $this->conexao->commit();
