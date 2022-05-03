@@ -20,10 +20,9 @@ class Empresa extends Entidade implements IEmpresa
     Entidade::__construct($conexao);
   }
 
-
   public function listarPorId(int $id)
   {
-    $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
+    $query = "SELECT * FROM " . $this->table . " WHERE id = :id ORDER BY id;";
     $stmt = $this->conexao->prepare($query);
     $stmt->bindParam(':id', $id);
     $stmt->execute();

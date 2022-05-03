@@ -28,9 +28,20 @@ abstract class Entidade implements ICrud
 
   public function listarTudo()
   {
-    $query = "SELECT a.*, c.nome AS nome" . $this->relacionamento . ", c.id AS " . $this->chaveEstrangeira . " FROM " . $this->table . " a JOIN empresas_usuarios b ON a.id = b." . $this->chavePrimaria . " JOIN " . $this->relacionamento . " c ON b." . $this->chaveEstrangeira . " = c.id ORDER BY a.id";
+    $query = "SELECT * FROM " . $this->table . " ORDER BY id";
     $stmt = $this->conexao->prepare($query);
     $stmt->execute();
+    // print_r($stmt->errorInfo());
+    return $stmt;
+  }
+
+  public function listarTudoComRelacionamento()
+  {
+    $query = "SELECT a.id, c.nome AS nome" . $this->relacionamento . ", c.id AS " . $this->chaveEstrangeira . " FROM " . $this->table . " a JOIN empresas_usuarios b ON a.id = b." . $this->chavePrimaria . " JOIN " . $this->relacionamento . " c ON b." . $this->chaveEstrangeira . " = c.id ORDER BY a.id";
+    $stmt = $this->conexao->prepare($query);
+    $stmt->execute();
+    // print_r($stmt->errorInfo());
+
     return $stmt;
   }
 
