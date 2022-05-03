@@ -11,6 +11,11 @@ services:
       - ./:/var/www/html/
     ports:
       - 80:80
+    environment:
+      - DB_HOST=db
+      - DB_NAME=contato_seguro_backend
+      - DB_USER=root
+      - DB_PASS=123456
   db:
     container_name: db
     image: mysql:8.0.28
