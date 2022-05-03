@@ -3,44 +3,137 @@
 
 Este repositório contém a parte de Back End do desafio
 
-**Atenção**, para este container funcionar corretamente você deve ter o composer instalado na sua máquina local.
-
-Caso não o tenha, [você pode encontrar como realizar a instalação aqui!](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos)
-
-
 ## Como rodar o projeto
 
 
 Para rodar o Back End, siga estas etapas:
 
-1. Clone o repositório
+- Clone o repositório
 
 ```bash
   $ git clone git@github.com:alexsandron3/contato_seguro_backend.git
 ```
 
-2. Entre na pasta
+- Entre na pasta
 
 ```bash
   $ cd contato_seguro_backend
 ```
 
 
-3. Inicie crie os containers do PHP e container do MYSQL
+- Inicie crie os containers do PHP e container do MYSQL
 
 ```bash
   $ docker-compose up
 ```
-# Back End
+
+## Documentação da API
+
+### Usuário
+
+**Body**
+| Chave   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `nome`      | `string` | **Obrigatório**. O NOME do usuário |
+| `dataNascimento`      | `string` | **Opcional**. O data de nascimento do usuário |
+| `cidadeNascimento`      | `string` | **Opcional**. A cidade de nascimento do usuário |
+| `email`      | `string` | **Obrigatório**. O email do usuário |
+| `telefone`      | `string` | **Opcional**. O telefone do usuário |
+| `empresas`      | `array<strings>` | **Obrigatório**. Array com id das empresas que este usuário está |
+
+**Parâmetro**
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` | **Obrigatório**. O ID do usuário que você quer |
 
 
-Este repositório contém a parte de Back End do desafio
+#### Retorna todos os usuários
 
-**Atenção**, para este container funcionar corretamente você deve ter o composer instalado na sua máquina local.
+```http
+  GET /app/usuario/
+```
 
-Caso não o tenha, [você pode encontrar como realizar a instalação aqui!](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos)
+#### Cadastra um usuário
+
+```http
+  POST /app/usuario/
+```
+#### Retorna um usuário
+
+```http
+  GET /app/usuario/id.php/${id}
+```
+
+#### Atualiza um usuário
+
+```http
+  PUT /app/usuario/id.php/${id}
+```
+
+#### Deleta um usuário
+
+```http
+  DELETE /app/usuario/id.php/${id}
+```
+---
+
+### Empresa
+
+**Body**
+
+| Chave   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `nome`      | `string` | **Obrigatório**. O NOME da empresa |
+| `endereco`      | `string` | **Obrigatório**. O da empresa |
+| `cnpj`      | `string` | **Obrigatório**. O cnpj da empresa |
+**Parâmetro**
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` | **Obrigatório**. O ID do usuário que você quer |
+
+#### Retorna todas as empresas
+
+```http
+  GET /app/empresa/
+```
+
+#### Retorna uma empresa
+
+```http
+  GET app/empresa/id.php/${id}
+```
+
+**Parâmetro**
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `string` | **Obrigatório**. O ID da empresa que você quer |
 
 
+#### Cadastra uma empresa
+
+```http
+  POST /app/empresa/
+```
+#### Retorna um usuário
+
+```http
+  GET /app/empresa/id.php/${id}
+```
+
+#### Atualiza um usuário
+
+```http
+  PUT /app/empresa/id.php/${id}
+```
+
+#### Deleta um usuário
+
+```http
+  DELETE /app/empresa/id.php/${id}
+```
 ## Dificuldades e Desafios
 
 
@@ -76,3 +169,4 @@ Olhando no linkedin de alguns dos desenvolvedores vi que eles utilizam um banco 
 Com essas duas informações entendi que a empresa trabalha com banco de dados relacional, então quis mostrar que eu tinha conhecimento.
 Além disso, o readme deixava bem claro que existiam entidades e relacionamentos, características fortes de bancos de dados relacionais.
 A escolha do Mysql foi mais pessoal, é um banco que eu utilizo e estudo a alguns anos e tenho mais facilidade com a sintaxe e documentação.
+
