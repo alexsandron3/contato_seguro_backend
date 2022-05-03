@@ -20,11 +20,14 @@ $resposta = array();
 $tipoRequisicao = $_SERVER['REQUEST_METHOD'];
 
 if ($tipoRequisicao === GET) {
-  $resultado = $usuario->listarTudo();
+  $resultadoUsuarios = $usuario->listarTudo();
+  $resultado = $usuario->listarTudoComRelacionamento();
   if ($resultado->rowCount()) {
     $resposta['mensagem'] = SUCESSO_AO_PESQUISAR;
     $linha = $resultado->fetchAll(PDO::FETCH_ASSOC);
-    $resposta['dados'] = $linha;
+    $linhaUsuarios = $resultadoUsuarios->fetchAll(PDO::FETCH_ASSOC);
+    $resposta['dados'] = $linhaUsuarios;
+    $resposta['adicionais'] = $linha ;
     http_response_code(HTTP_STATUS_OK);
   } else {
     http_response_code(HTTP_STATUS_NOT_FOUND);
