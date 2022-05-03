@@ -5,7 +5,7 @@ namespace App;
 use App\Interfaces\IUsuario;
 use Error;
 
-require_once '../../../vendor/autoload.php';
+include_once '../../vendor/autoload.php';
 
 class Usuario extends Entidade implements IUsuario
 {

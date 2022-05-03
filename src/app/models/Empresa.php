@@ -4,7 +4,7 @@ namespace App;
 
 use App\Interfaces\IEmpresa;
 
-require_once '../../../vendor/autoload.php';
+include_once '../../vendor/autoload.php';
 
 class Empresa extends Entidade implements IEmpresa
 {

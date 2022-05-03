@@ -10,7 +10,7 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 header('Access-Control-Allow-Origin: *');
 
 include_once "../utils/constants.php";
-require_once '../../../vendor/autoload.php';
+include_once '../../vendor/autoload.php';
 
 $database = new Database;
 $connection = $database->getConnection();

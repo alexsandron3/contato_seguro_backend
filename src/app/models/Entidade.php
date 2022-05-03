@@ -4,7 +4,7 @@ namespace App;
 
 use App\Interfaces\ICrud;
 
-require_once '../../../vendor/autoload.php';
+include_once '../../vendor/autoload.php';
 
 
 abstract class Entidade implements ICrud
