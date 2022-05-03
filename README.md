@@ -111,19 +111,19 @@ Para rodar o Back End, siga estas etapas:
 ```http
   POST /app/empresa/
 ```
-#### Retorna um usuário
+#### Retorna uma empresa
 
 ```http
   GET /app/empresa/id.php/${id}
 ```
 
-#### Atualiza um usuário
+#### Atualiza uma empresa
 
 ```http
   PUT /app/empresa/id.php/${id}
 ```
 
-#### Deleta um usuário
+#### Deleta uma empresa
 
 ```http
   DELETE /app/empresa/id.php/${id}
