@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/models",
+            "App\\Database\\": "app/configs",
+            "App\\Interfaces\\": "app/interfaces"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
