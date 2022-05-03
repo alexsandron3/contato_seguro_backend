@@ -55,8 +55,8 @@ CREATE TABLE `empresas_usuarios` (
   `idEmpresa` int NOT NULL,
   UNIQUE KEY `idUsuario` (`idUsuario`,`idEmpresa`),
   KEY `idEmpresa` (`idEmpresa`),
-  CONSTRAINT `empresas_usuarios_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `empresas_usuarios_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `empresas` (`id`)
+  CONSTRAINT `empresas_usuarios_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `empresas_usuarios_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `empresas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-01 13:17:51
+-- Dump completed on 2022-05-02 19:16:31
